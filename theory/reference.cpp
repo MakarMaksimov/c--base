@@ -17,15 +17,31 @@ using namespace std;
 
 */
 
+
 int& func() {
 	int e = 100;
 	return e; // Так делать нехорошо, так как переменная e - удалится после завершения функции
 	// и ссылка будет показывать в мусор
 }
 
+int& func2(int& e) { // а вот так можно, потому что e ссылается на внешний объект, который
+	return e; // не будет удалён после завершение функции
+}
+
 void SquarePS(double a, double& p, double& s) {
 	p = a * 4;
 	s = a * a;
+}
+
+void read(int**& a, int& n, int& m) {
+	cin >> n >> m;
+	a = new int* [n];
+	for (int i = 0; i < n; i++)
+	{
+		a[i] = new int[m];
+		for (int j = 0; j < m; j++)
+			cin >> a[i][j];
+	}
 }
 
 int main() {
@@ -34,8 +50,12 @@ int main() {
 	s = 5;
 	cout << a << " ";
 	int& ss = func();
-	cout << ss << endl;
+	cout << ss << " ";
+	int& sss = func2(a);
+	cout << sss << endl;
 
+	// Ссылка думает, что она - переменная a, настолько, что даже её адрес
+	cout << "variable: " << &a << " reference: " << &s << endl; // совпадает с переменной a
 	double perim, sq;
 	SquarePS(3, perim, sq);
 	cout << perim << " " << sq << endl;
