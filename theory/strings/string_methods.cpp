@@ -27,6 +27,15 @@ int main()
     cout << s << endl;
     s.erase(); // удалить все символы из строки (значение
     // по умолчанию для первого параметра = 0
+    
+    // Удалить 4 и 7 из строки
+    cin >> s;
+    for (int i = 0; i < s.size();)
+        if (s[i] == '4' || s[i] == '7')
+            s.erase(i, 1);
+        else
+            i++;
+    cout << s;
 
     s = "Hello world";
     cout << s.substr(6, 3) << endl; // выделить подстроку
